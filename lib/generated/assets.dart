@@ -2,8 +2,12 @@
 class Assets {
   Assets._();
 
+  static const String imageBookmark = 'assets/image/bookmark.png';
+  static const String imageBookmarkNoSelected = 'assets/image/bookmarkNoSelected.png';
   static const String imageBrowse = 'assets/image/browse.png';
   static const String imageHome = 'assets/image/home.png';
+  static const String imageIconAdd = 'assets/image/iconAdd.png';
+  static const String imageIconAddDone = 'assets/image/iconAddDone.png';
   static const String imageSearch = 'assets/image/search.png';
   static const String imageWatchlist = 'assets/image/watchlist.png';
 

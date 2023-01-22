@@ -8,7 +8,7 @@ import '../../screens/watchlist_screen/watchlistScreen.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({Key? key}) : super(key: key);
-  static const String routName = "HomeLayout";
+  static const String routeName = "HomeLayout";
 
   @override
   State<HomeLayout> createState() => _HomeLayoutState();
@@ -16,6 +16,7 @@ class HomeLayout extends StatefulWidget {
 
 class _HomeLayoutState extends State<HomeLayout> {
   int currentIndex = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -24,48 +25,49 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          changeTap(index);
-        },
-        items: const [
-          BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(Assets.imageHome)),
-              label: "HOME",
-              backgroundColor: BLACK_BACKGROUND_nav),
-          BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(Assets.imageSearch)),
-              label: "SEARCH",
-              backgroundColor: BLACK_BACKGROUND_nav),
-          BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage(Assets.imageBrowse)),
-              label: "BROWSE",
-              backgroundColor: BLACK_BACKGROUND_nav),
-          BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage(Assets.imageWatchlist),
-              ),
-              label: "WATCHLIST",
-              backgroundColor: BLACK_BACKGROUND_nav),
-        ],
+    return SafeArea(
+
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (index) {
+            changeTap(index);
+          },
+          items: const [
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage(Assets.imageHome)),
+                label: "HOME",
+                backgroundColor: BLACK_BACKGROUND_nav),
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage(Assets.imageSearch)),
+                label: "SEARCH",
+                backgroundColor: BLACK_BACKGROUND_nav),
+            BottomNavigationBarItem(
+                icon: ImageIcon(AssetImage(Assets.imageBrowse)),
+                label: "BROWSE",
+                backgroundColor: BLACK_BACKGROUND_nav),
+            BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage(Assets.imageWatchlist),
+                ),
+                label: "WATCHLIST",
+                backgroundColor: BLACK_BACKGROUND_nav),
+          ],
+        ),
+        body: taps[currentIndex],
       ),
-      body: taps[currentIndex],
     );
   }
 
   List<Widget> taps = [
-      Home_Screen(),
-     Browse_Screen(),
+    const Home_Screen(),
+    const Browse_Screen(),
     const Search_Screen(),
     const WatchList_Screen(),
   ];
 
   void changeTap(int index) {
-    currentIndex=index;
-    setState(() {
-    });
+    currentIndex = index;
+    setState(() {});
   }
 }

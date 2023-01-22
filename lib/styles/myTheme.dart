@@ -40,6 +40,7 @@ class MyThemeData {
       ));
 
   static ThemeData darkTheme = ThemeData(
+
       primaryColor: PRIMARY_COLOR,
       scaffoldBackgroundColor: BLACK_BACKGROUND,
       colorScheme: const ColorScheme(
