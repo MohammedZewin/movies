@@ -5,10 +5,14 @@ class Popular_response {
     this.totalPages,
     this.totalResults,
     this.statusCode,
+    this.status_message,
+    this.success,
   });
 
   Popular_response.fromJson(dynamic json) {
     page = json['page'];
+    page = json['status_message'];
+    page = json['success'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
@@ -18,6 +22,8 @@ class Popular_response {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
     statusCode = json['statusCode'];
+    status_message = json['status_message'];
+    success = json['success'];
   }
 
   int? page;
@@ -25,6 +31,8 @@ class Popular_response {
   int? totalPages;
   int? totalResults;
   int? statusCode;
+  String? status_message;
+  String? success;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
