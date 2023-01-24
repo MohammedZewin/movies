@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/TopRatedMovies_response.dart';
+import '../../models/popularRespons.dart';
 import '../../styles/colors.dart';
 
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({Key? key}) : super(key: key);
+
   static const String routeName = "Details_Screen";
+
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -14,6 +17,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Dora and the lost city of gold"),

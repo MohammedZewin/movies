@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:movies/styles/colors.dart';
 import '../../generated/assets.dart';
 import '../../screens/browse_screen/browseScreen.dart';
@@ -7,7 +8,7 @@ import '../../screens/search_screen/searchScreen.dart';
 import '../../screens/watchlist_screen/watchlistScreen.dart';
 
 class HomeLayout extends StatefulWidget {
-  const HomeLayout({Key? key}) : super(key: key);
+
   static const String routeName = "HomeLayout";
 
   @override
@@ -21,6 +22,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
   }
 
   @override
@@ -60,10 +62,10 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
 
   List<Widget> taps = [
-    const Home_Screen(),
-    const Browse_Screen(),
-    const Search_Screen(),
-    const WatchList_Screen(),
+     Home_Screen(),
+     Browse_Screen(),
+     Search_Screen(),
+     WatchList_Screen(),
   ];
 
   void changeTap(int index) {
