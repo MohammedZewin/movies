@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
-class pervider extends ChangeNotifier{
+class MyPervider extends ChangeNotifier{
+ var id=0;
 
 }

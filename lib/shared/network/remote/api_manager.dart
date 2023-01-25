@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 
 import '../../../models/TopRatedMovies_response.dart';
+import '../../../models/details_data/Details_Data.dart';
 import '../../../models/latestMovies_response.dart';
 import '../../../models/popular/Popular_movies.dart';
 import '../../../models/popularRespons.dart';
 
+import '../../../models/similarMovies/SimilarMovies.dart';
 import '../../constants/constants.dart';
 
 class ApiManager {
@@ -42,6 +45,7 @@ class ApiManager {
       var json = jsonDecode(LatestMovies.body);
       LatestMovies_response latestMovies_response =
           LatestMovies_response.fromJson(json);
+      print('LatestMovies');
       return latestMovies_response;
     } catch (e) {
       rethrow;
@@ -58,7 +62,44 @@ class ApiManager {
       var json = jsonDecode(TopRatedMovies.body);
       TopRatedMovies_response topRatedMovies_response =
           TopRatedMovies_response.fromJson(json);
+      print('TopRatedMovies');
       return topRatedMovies_response;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  //____________________________details______________________________________
+  static Future<DetailsData> getDetailsData(int idMovies) async {
+    var url = Uri.https(BASE, '/3/movie/$idMovies',
+        {"api_key": APIKEY, 'movie_id': '$idMovies'});
+    try {
+      Response DetailsDataRsponce = await http.get(url);
+      print(DetailsDataRsponce.statusCode);
+      var json = jsonDecode(DetailsDataRsponce.body);
+      DetailsData detailsData = DetailsData.fromJson(json);
+
+      print('DetailsData');
+      return detailsData;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+
+
+  static Future<SimilarMovies> getSimilarMovies(int idMovies) async {
+    var url = Uri.https(BASE, '/3/movie/$idMovies/similar',
+        {"api_key": APIKEY});
+    try {
+      Response DetailsSimilarMovies = await http.get(url);
+      print(DetailsSimilarMovies.statusCode);
+      var json = jsonDecode(DetailsSimilarMovies.body);
+      SimilarMovies detailsData = SimilarMovies.fromJson(json);
+
+      print('DetailsData');
+      return detailsData;
     } catch (e) {
       throw e;
     }

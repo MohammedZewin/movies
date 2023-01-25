@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'package:movies/models/popularRespons.dart';
 import 'package:movies/shared/network/remote/api_manager.dart';
+import 'package:provider/provider.dart';
 import '../../generated/assets.dart';
-
 import '../../models/TopRatedMovies_response.dart';
 import '../../models/latestMovies_response.dart';
 import '../../models/popular/Popular_movies.dart';
+import '../../provider.dart';
 import '../../shared/componant/componants.dart';
 import '../../shared/constants/constants.dart';
 import '../../styles/colors.dart';
@@ -17,6 +16,7 @@ class Home_Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<MyPervider>(context);
     return Scaffold(
       body: Column(
         children: [
@@ -24,26 +24,33 @@ class Home_Screen extends StatelessWidget {
             child: FutureBuilder<PopularMovies_m>(
               future: ApiManager.getPopular(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
                 var posterData = snapshot.data?.results ?? [];
+
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: posterData.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, DetailsScreen.routeName,
-                            arguments: posterData[index]);
+                        provider.id = posterData[index].id as int;
+                        print(provider.id);
+                        Navigator.pushNamed(
+                          context,
+                          DetailsScreen.routeName,
+                        );
                       },
                       child: PosterScreen(
-                        context: context,
-                        imagePosterFromApi:
-                            '$showImage${posterData[index].backdropPath ?? ''}',
-                        imageSelected: Assets.imageBookmarkNoSelected,
-                        filmName: '${posterData[index].title}',
-                        date: '${posterData[index].releaseDate}',
-                        imageMiniPosterApi:
-                        '$showImage${posterData[index].posterPath ?? ''}'
-                      ),
+                          context: context,
+                          imagePosterFromApi:
+                              '$showImage${posterData[index].backdropPath ?? ''}',
+                          imageSelected: Assets.imageBookmarkNoSelected,
+                          filmName: '${posterData[index].title}',
+                          date: '${posterData[index].releaseDate}',
+                          imageMiniPosterApi:
+                              '$showImage${posterData[index].posterPath ?? ''}'),
                     );
                   },
                 );
@@ -72,6 +79,9 @@ class Home_Screen extends StatelessWidget {
             child: FutureBuilder<LatestMovies_response>(
               future: ApiManager.getLatestMovies(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
                 var LASTERMOVIES = snapshot.data?.genres ?? [];
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -117,15 +127,29 @@ class Home_Screen extends StatelessWidget {
             child: FutureBuilder<TopRatedMovies_response>(
               future: ApiManager.getTopRatedMovies(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
                 var TopRate = snapshot.data?.results ?? [];
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: TopRate.length,
                   itemBuilder: (context, index) {
-                    return NewReleases(context,
-                        imageSelected: Assets.imageBookmarkNoSelected,
-                        imageFromApi:
-                        '$showImage${TopRate[index].backdropPath ?? ''}');
+                    return InkWell(
+                      onTap: () {
+                        provider.id = TopRate[index].id as int;
+                        print(provider.id);
+                        Navigator.pushNamed(
+                          context,
+                          DetailsScreen.routeName,
+                        );
+                      },
+                      child: NewReleases(context,
+                          imageSelected: Assets.imageBookmarkNoSelected,
+                          imageFromApi:
+                              '$showImage${TopRate[index].backdropPath ?? ''}',
+                      ),
+                    );
                   },
                 );
               },
