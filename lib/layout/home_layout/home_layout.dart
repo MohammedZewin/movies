@@ -8,7 +8,6 @@ import '../../screens/search_screen/searchScreen.dart';
 import '../../screens/watchlist_screen/watchlistScreen.dart';
 
 class HomeLayout extends StatefulWidget {
-
   static const String routeName = "HomeLayout";
 
   @override
@@ -22,13 +21,11 @@ class _HomeLayoutState extends State<HomeLayout> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: currentIndex,
@@ -62,10 +59,10 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
 
   List<Widget> taps = [
-     Home_Screen(),
-     Browse_Screen(),
-     Search_Screen(),
-     WatchList_Screen(),
+    Home_Screen(),
+    Search_Screen(),
+    Browse_Screen(),
+    WatchList_Screen(),
   ];
 
   void changeTap(int index) {

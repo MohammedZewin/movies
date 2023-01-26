@@ -6,7 +6,10 @@ Widget NewReleases(BuildContext context,
     {required String imageSelected,
     required String imageFromApi,
     Function? addToWatchList,
-    Function? goMovieDetails,}) {
+    Function? goMovieDetails,
+      double height=0.23,
+      double width=0.33,
+    }) {
   return Container(
     color: bottomColor,
     child: Column(
@@ -22,8 +25,8 @@ Widget NewReleases(BuildContext context,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                height: MediaQuery.of(context).size.height * 0.23,
-                width: MediaQuery.of(context).size.width * 0.33,
+                height: MediaQuery.of(context).size.height *height,
+                width: MediaQuery.of(context).size.width * width,
                 child: Image.network(
                   imageFromApi,
                   fit: BoxFit.fill,
@@ -148,3 +151,49 @@ Widget PosterScreen(
   );
 }
 //------------------------------------------------------------------------------
+Widget DefaultTextFormField({
+  required String label,
+  required TextEditingController controller,
+  required String? Function(String?) validator,
+  IconData? prefixIcon,
+  IconData? suffixIcon,
+  bool obscureText = false,
+  TextInputType? keyboardType,
+  Function()? showPassword,
+  Function(String)? onChance,
+}) =>
+    TextFormField(
+      decoration: InputDecoration(
+        label: Text(label),
+        prefixIcon: Icon(prefixIcon,
+        color: Colors.white,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(suffixIcon),
+          onPressed: () {
+            showPassword;
+          },
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: Colors.white,
+            width: 2,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(
+            color: bottomColor,
+            width: 2,
+          ),
+        ),
+      ),
+      controller: controller,
+      validator: validator,
+      obscureText: obscureText,
+      keyboardType: keyboardType,
+      onChanged: (value){
+        onChance!(value);
+      },
+    );

@@ -28,7 +28,6 @@ class Home_Screen extends StatelessWidget {
                   return Center(child: CircularProgressIndicator());
                 }
                 var posterData = snapshot.data?.results ?? [];
-
                 return ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: posterData.length,

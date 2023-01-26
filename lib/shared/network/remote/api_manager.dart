@@ -9,6 +9,7 @@ import '../../../models/latestMovies_response.dart';
 import '../../../models/popular/Popular_movies.dart';
 import '../../../models/popularRespons.dart';
 
+import '../../../models/search/Search_Model.dart';
 import '../../../models/similarMovies/SimilarMovies.dart';
 import '../../constants/constants.dart';
 
@@ -104,4 +105,29 @@ class ApiManager {
       throw e;
     }
   }
+
+
+
+
+  static Future<SearchModel> getSearchModel(String search) async {
+    var url = Uri.https(BASE, '/3/search/movie',
+        {"api_key": APIKEY,
+        "query":search,
+        });
+    try {
+      Response SearchModelMovies = await http.get(url);
+      print(SearchModelMovies.statusCode);
+      var json = jsonDecode(SearchModelMovies.body);
+      SearchModel detailsData = SearchModel.fromJson(json);
+
+      print('SearchModelMovies');
+      return detailsData;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+
+
+
 }
