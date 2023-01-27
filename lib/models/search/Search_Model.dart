@@ -15,14 +15,14 @@ class SearchModel {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(Resultss.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
   num? page;
-  List<Results>? results;
+  List<Resultss>? results;
   num? totalPages;
   num? totalResults;
 
@@ -54,8 +54,8 @@ class SearchModel {
 /// vote_average : 6.3
 /// vote_count : 507
 
-class Results {
-  Results({
+class Resultss {
+  Resultss({
       this.adult, 
       this.backdropPath, 
       this.genreIds, 
@@ -71,7 +71,7 @@ class Results {
       this.voteAverage, 
       this.voteCount,});
 
-  Results.fromJson(dynamic json) {
+  Resultss.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<num>() : [];

@@ -1,14 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/provider.dart';
+import 'package:movies/myProvider/provider.dart';
 import 'package:movies/screens/browse_screen/browseScreen.dart';
 import 'package:movies/screens/home_screen/HomeScreen.dart';
 import 'package:movies/screens/home_screen/details_Screen.dart';
 import 'package:movies/styles/myTheme.dart';
 import 'package:provider/provider.dart';
-
+import 'firebase_options.dart';
 import 'layout/home_layout/home_layout.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ChangeNotifierProvider(
     create: (context) => MyPervider(),
     child: MyApp(),

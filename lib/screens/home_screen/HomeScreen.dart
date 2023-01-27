@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:movies/firebase_Uitils/firebase_Utils.dart';
+import 'package:movies/firebase_Uitils/modelFirebase/modelMovies.dart';
 import 'package:movies/shared/network/remote/api_manager.dart';
 import 'package:provider/provider.dart';
 import '../../generated/assets.dart';
 import '../../models/TopRatedMovies_response.dart';
 import '../../models/latestMovies_response.dart';
 import '../../models/popular/Popular_movies.dart';
-import '../../provider.dart';
+import '../../myProvider/provider.dart';
 import '../../shared/componant/componants.dart';
 import '../../shared/constants/constants.dart';
 import '../../styles/colors.dart';
@@ -93,8 +95,17 @@ class Home_Screen extends StatelessWidget {
                       },
                       child: NewReleases(context,
                           imageSelected: Assets.imageBookmarkNoSelected,
-                          imageFromApi:
-                              'https://ok.arbcinema.com/wp-content/uploads/2021/11/%D9%81%D9%8A%D9%84%D9%85-last-D-2021-%D9%85%D8%AA%D8%B1%D8%AC%D9%85-%D9%85%D8%B4%D8%A7%D9%87%D8%AF%D8%A9-%D8%A7%D9%88%D9%86-%D9%84%D8%A7%D9%8A%D9%86-268x333.jpg'),
+                          imageFromApi: 'https://ok.arbcinema.com/wp-content/uploads/2021/11'
+                              '/%D9%81%D9%8A%D9%84%D9%85-last-D-2021-%D9%85%D8%AA%D8%B1%D8%AC%D'
+                              '9%85-%D9%85%D8%B4%D8%A7%D9%87%D8%AF%D8%A9-%D8%A7%D9%88%D9%86-%D9%84'
+                              '%D8%A7%D9%8A%D9%86-268x333.jpg',
+                          addToWatchList: (){
+                            // provider.id = TopRate[index].id as int;
+                            MyMoviesList m=MyMoviesList(idFilm: provider.id);
+                            AddMovieToFirestore(m);
+                          }
+                      ),
+
                     );
                   },
                 );
@@ -147,6 +158,11 @@ class Home_Screen extends StatelessWidget {
                           imageSelected: Assets.imageBookmarkNoSelected,
                           imageFromApi:
                               '$showImage${TopRate[index].backdropPath ?? ''}',
+                        addToWatchList: (){
+                          provider.id = TopRate[index].id as int;
+                          MyMoviesList m=MyMoviesList(idFilm: provider.id);
+                        AddMovieToFirestore(m);
+                        }
                       ),
                     );
                   },

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/generated/assets.dart';
-import 'package:movies/provider.dart';
+import 'package:movies/myProvider/provider.dart';
 import 'package:movies/shared/componant/componants.dart';
 import 'package:movies/shared/constants/constants.dart';
 import 'package:movies/shared/network/remote/api_manager.dart';
@@ -36,6 +36,8 @@ class _search_screen extends State<Search_Screen> {
             padding: const EdgeInsets.all(8.0),
             child: DefaultTextFormField(
                 prefixIcon: Icons.search,
+                keyboardType: TextInputType.text,
+
                 onChance: (value) {
                   if (value != null && value.isNotEmpty) {
                     s = value;

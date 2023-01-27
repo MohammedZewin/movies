@@ -5,7 +5,7 @@ import '../../styles/colors.dart';
 Widget NewReleases(BuildContext context,
     {required String imageSelected,
     required String imageFromApi,
-    Function? addToWatchList,
+     Function? addToWatchList,
     Function? goMovieDetails,
       double height=0.23,
       double width=0.33,
@@ -163,7 +163,9 @@ Widget DefaultTextFormField({
   Function(String)? onChance,
 }) =>
     TextFormField(
+        cursorColor: Colors.pinkAccent,
       decoration: InputDecoration(
+
         label: Text(label),
         prefixIcon: Icon(prefixIcon,
         color: Colors.white,

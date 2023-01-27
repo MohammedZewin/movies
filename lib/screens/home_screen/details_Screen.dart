@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/generated/assets.dart';
 import 'package:movies/models/details_data/Details_Data.dart';
-import 'package:movies/provider.dart';
+import 'package:movies/myProvider/provider.dart';
 import 'package:movies/shared/componant/componants.dart';
 import 'package:movies/shared/network/remote/api_manager.dart';
 import 'package:provider/provider.dart';
+import '../../firebase_Uitils/firebase_Utils.dart';
+import '../../firebase_Uitils/modelFirebase/modelMovies.dart';
 import '../../models/similarMovies/SimilarMovies.dart';
 import '../../shared/constants/constants.dart';
 import '../../models/TopRatedMovies_response.dart';
@@ -236,6 +238,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               imageSelected: Assets.imageBookmarkNoSelected,
                               imageFromApi:
                                   '$showImage${SimilarMovies[index].backdropPath ?? ''}',
+                                addToWatchList: (){
+                                  provider.id = SimilarMovies[index].id as int;
+                                  MyMoviesList m=MyMoviesList(idFilm: provider.id);
+                                  AddMovieToFirestore(m);
+                                }
                             ),
                           );
                         },
