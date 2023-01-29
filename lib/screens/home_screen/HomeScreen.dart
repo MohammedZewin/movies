@@ -13,9 +13,21 @@ import '../../shared/constants/constants.dart';
 import '../../styles/colors.dart';
 import 'details_Screen.dart';
 
-class Home_Screen extends StatelessWidget {
+class Home_Screen extends StatefulWidget {
   static const String routeName = "Home_Screen";
 
+  @override
+  State<Home_Screen> createState() => _Home_ScreenState();
+}
+
+class _Home_ScreenState extends State<Home_Screen> {
+  bool isSelected=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     // isSelected=true;
+  }
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<MyPervider>(context);
@@ -45,9 +57,15 @@ class Home_Screen extends StatelessWidget {
                       },
                       child: PosterScreen(
                           context: context,
+                          onPressed: (){
+                            isSelected=!isSelected;
+                            setState(() {
+
+                            });
+                          },
                           imagePosterFromApi:
                               '$showImage${posterData[index].backdropPath ?? ''}',
-                          imageSelected: Assets.imageBookmarkNoSelected,
+                          imageSelected: isSelected?Assets.imageIconAddDone:Assets.imageBookmarkNoSelected,
                           filmName: '${posterData[index].title}',
                           date: '${posterData[index].releaseDate}',
                           imageMiniPosterApi:
@@ -99,11 +117,16 @@ class Home_Screen extends StatelessWidget {
                               '/%D9%81%D9%8A%D9%84%D9%85-last-D-2021-%D9%85%D8%AA%D8%B1%D8%AC%D'
                               '9%85-%D9%85%D8%B4%D8%A7%D9%87%D8%AF%D8%A9-%D8%A7%D9%88%D9%86-%D9%84'
                               '%D8%A7%D9%8A%D9%86-268x333.jpg',
-                          addToWatchList: (){
-                            // provider.id = TopRate[index].id as int;
-                            MyMoviesList m=MyMoviesList(idFilm: provider.id);
-                            AddMovieToFirestore(m);
-                          }
+                          // addToWatchList: (){
+                          //   // provider.id = TopRate[index].id as int;
+                          //   // MyMoviesList m=MyMoviesList(idFilm: provider.id,
+                          //   //   description:LASTERMOVIES[index].overview??"",
+                          //   //   title: TopRate[index].title??"",
+                          //   //   image: TopRate[index].posterPath??"",
+                          //
+                          //   );
+                          //   AddMovieToFirestore(m);
+                          // }
                       ),
 
                     );
@@ -155,13 +178,21 @@ class Home_Screen extends StatelessWidget {
                         );
                       },
                       child: NewReleases(context,
-                          imageSelected: Assets.imageBookmarkNoSelected,
+                          imageSelected:isSelected?Assets.imageIconAddDone:Assets.imageBookmarkNoSelected,
                           imageFromApi:
                               '$showImage${TopRate[index].backdropPath ?? ''}',
                         addToWatchList: (){
+
                           provider.id = TopRate[index].id as int;
-                          MyMoviesList m=MyMoviesList(idFilm: provider.id);
-                        AddMovieToFirestore(m);
+                          MyMoviesList m=MyMoviesList(idFilm: provider.id,
+                            description:TopRate[index].overview??"",
+                            title: TopRate[index].title??"",
+                            image: TopRate[index].posterPath??"",
+                          );
+                          if(m.id!=0){
+                            provider.idMovieList.add(provider.id);
+                            AddMovieToFirestore(m);
+                          }
                         }
                       ),
                     );

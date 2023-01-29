@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movies/generated/assets.dart';
+import 'package:provider/provider.dart';
 
+import '../../myProvider/provider.dart';
 import '../../styles/colors.dart';
 
 Widget NewReleases(BuildContext context,
@@ -9,7 +12,9 @@ Widget NewReleases(BuildContext context,
     Function? goMovieDetails,
       double height=0.23,
       double width=0.33,
+      bool isSelected=false,
     }) {
+  var provider=Provider.of<MyPervider>(context);
   return Container(
     color: bottomColor,
     child: Column(
@@ -37,7 +42,7 @@ Widget NewReleases(BuildContext context,
                   addToWatchList!();
                 },
                 child: Image.asset(
-                  imageSelected,
+                  isSelected?Assets.imageIconAddDone:Assets.imageBookmarkNoSelected,
                 ),
               ),
             ],

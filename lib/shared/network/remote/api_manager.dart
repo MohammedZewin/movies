@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
+
 
 import '../../../models/TopRatedMovies_response.dart';
 import '../../../models/details_data/Details_Data.dart';
 import '../../../models/latestMovies_response.dart';
 import '../../../models/popular/Popular_movies.dart';
-import '../../../models/popularRespons.dart';
+
 
 import '../../../models/search/Search_Model.dart';
 import '../../../models/similarMovies/SimilarMovies.dart';

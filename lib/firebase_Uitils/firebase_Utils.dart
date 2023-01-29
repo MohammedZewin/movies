@@ -21,11 +21,11 @@ import 'modelFirebase/modelMovies.dart';
     return docRef.set(moviesList);
   }
 
-  //  Stream<QuerySnapshot<MyMoviesList>> getMovieFromFirestore(int i) {
-  //   return getMoviesCollection().orderBy(i).snapshots();
-  // }
-  //
-  //  Future<void> deleteTaskFromFirestore(MyMoviesList movie) {
-  //   return getMoviesCollection().doc('id').delete();
-  // }
+   Stream<QuerySnapshot<MyMoviesList>> getMovieFromFirestore() {
+    return getMoviesCollection().snapshots();
+  }
+
+   Future<void> deleteTaskFromFirestore(String id) {
+    return getMoviesCollection().doc(id).delete();
+  }
 
